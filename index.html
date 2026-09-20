@@ -1,8 +1,362 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joseph Zeng — Application &amp; AI Security</title>
+<meta name="description" content="Joseph Zeng, security leader in Singapore. Sixteen years across offensive security, application security and programme ownership, now working on the security of AI and agentic systems.">
+<meta name="author" content="Joseph Zeng">
+<link rel="canonical" href="https://josz5930.github.io/">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Joseph Zeng — Application &amp; AI Security">
+<meta property="og:description" content="Security leader in Singapore. Application security, offensive security, and the security of AI and agentic systems.">
+<meta property="og:url" content="https://josz5930.github.io/">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316222E'/%3E%3Cpath d='M16 5l9 3.6v7.2c0 5.6-3.8 9.6-9 11.2-5.2-1.6-9-5.6-9-11.2V8.6z' fill='none' stroke='%23E0A961' stroke-width='2'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#EEF0F3;
+    --surface:#F8F9FB;
+    --ink:#16222E;
+    --ink-2:#4A5C6E;
+    --rule:#C9D0D8;
+    --signal:#7D5111;
+    --measure:68ch;
+    --serif:"Spectral",Georgia,"Times New Roman",serif;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#141C24;
+      --surface:#1A242E;
+      --ink:#E7EAED;
+      --ink-2:#A2B0BD;
+      --rule:#2F3B47;
+      --signal:#E0A961;
+    }
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(1rem,0.97rem + 0.18vw,1.0625rem);
+    line-height:1.65;
+    text-rendering:optimizeLegibility;
+    -webkit-font-smoothing:antialiased;
+  }
+  p{margin:0 0 0.85em;max-width:var(--measure)}
+  p:last-child{margin-bottom:0}
+
+  a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;text-decoration-color:var(--rule)}
+  a:hover{text-decoration-color:var(--signal)}
+  a:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+
+  .skip{position:absolute;left:-9999px}
+  .skip:focus{left:1rem;top:1rem;position:fixed;background:var(--surface);padding:.6rem 1rem;z-index:10;border:1px solid var(--rule)}
+
+  .page{max-width:64rem;margin:0 auto;padding:clamp(2.5rem,7vw,6rem) clamp(1.25rem,5vw,4rem) 4rem}
+
+  /* ---- masthead ---- */
+  .masthead{padding-bottom:clamp(2rem,4vw,3rem)}
+  .name{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(2.75rem,10vw,5.5rem);
+    line-height:.95;letter-spacing:-.025em;
+    margin:0 0 1.1rem;
+  }
+  .standfirst{
+    font-size:clamp(1.0625rem,1rem + .35vw,1.3125rem);
+    line-height:1.5;max-width:34ch;color:var(--ink);
+    margin:0 0 1.6rem;border-left:2px solid var(--signal);padding-left:1rem;
+  }
+  .masthead p{color:var(--ink-2)}
+  .masthead p strong{color:var(--ink);font-weight:600}
+
+  .elsewhere{
+    font-family:var(--sans);font-size:.9375rem;
+    margin:1.75rem 0 0;padding:0;list-style:none;
+    display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;max-width:none;
+  }
+
+  /* ---- record rows ---- */
+  .record{
+    display:grid;grid-template-columns:11rem 1fr;gap:0 2.5rem;
+    border-top:1px solid var(--rule);
+    padding:clamp(1.75rem,3vw,2.5rem) 0;
+  }
+  .record > h2{
+    font-family:var(--sans);font-size:.875rem;font-weight:600;
+    letter-spacing:.005em;line-height:1.4;
+    margin:.25rem 0 0;color:var(--signal);
+  }
+  @media (max-width:46rem){
+    .record{grid-template-columns:1fr;gap:0}
+    .record > h2{margin-bottom:1.1rem}
+  }
+
+  .entry{padding-bottom:1.9rem}
+  .entry:last-child{padding-bottom:0}
+  .entry h3{
+    font-family:var(--sans);font-size:1.0625rem;font-weight:600;
+    line-height:1.4;margin:0 0 .4rem;
+  }
+  .meta{
+    font-family:var(--sans);font-size:.875rem;color:var(--ink-2);
+    margin:-.15rem 0 .55rem;
+  }
+  .meta b{font-weight:600;color:var(--ink)}
+
+  ul.plain{margin:0;padding:0;list-style:none;max-width:var(--measure)}
+  ul.plain li{margin-bottom:.45rem;padding-left:1.05rem;position:relative}
+  ul.plain li:last-child{margin-bottom:0}
+  ul.plain li::before{
+    content:"";position:absolute;left:0;top:.72em;
+    width:.4rem;height:1px;background:var(--signal);
+  }
+
+  /* ---- published research ---- */
+  .finding{
+    border-left:2px solid var(--rule);padding:.1rem 0 .1rem 1.1rem;
+    margin-bottom:1.6rem;
+  }
+  .finding:last-child{margin-bottom:0}
+  .finding .cve{
+    font-family:var(--mono);font-size:.9375rem;font-weight:500;
+    letter-spacing:-.01em;display:inline-block;margin-bottom:.25rem;
+  }
+  .finding p{font-size:.9875rem;color:var(--ink-2);margin:0}
+
+  /* ---- certifications ---- */
+  .certs{margin:0;max-width:var(--measure)}
+  .certs dt{
+    font-family:var(--sans);font-size:.8125rem;font-weight:600;
+    color:var(--ink-2);margin:0 0 .3rem;
+  }
+  .certs dd{margin:0 0 1.15rem;line-height:1.6}
+  .certs dd:last-child{margin-bottom:0}
+
+  footer{
+    border-top:1px solid var(--rule);margin-top:1rem;padding-top:1.5rem;
+    font-family:var(--sans);font-size:.8125rem;color:var(--ink-2);
+  }
+  footer p{max-width:var(--measure)}
+
+  @media print{
+    :root{--paper:#fff;--ink:#000;--ink-2:#333;--rule:#bbb;--signal:#000}
+    .elsewhere{display:none}
+    .record{break-inside:avoid}
+  }
+</style>
+</head>
 <body>
-<p>Welcome to my Github page :)</p>
-<p>&nbsp;</p>
-<p>My Security related articles are at the following Github page:&nbsp;<a href="https://github.com/josz5930/secarticles">https://github.com/josz5930/secarticles</a></p>
-<p><a rel="me" href="https://infosec.exchange/@josephzeng">I am on InfoSec Exchange!</a></p>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page">
+
+  <header class="masthead">
+    <h1 class="name">Joseph&nbsp;Zeng</h1>
+
+    <p class="standfirst">Application and AI security, Singapore.</p>
+
+    <p>Sixteen years across offensive security, application security and security programme ownership. I lead the Singapore application security function at <strong>ByteDance</strong>, where I own the design-review and penetration-testing gates for Tiktok and Lemon8 and other product lines.</p>
+
+    <p>I also build. I have specified, shipped and measured LLM and agent-based security systems that run in production, and I test the AI features other teams ship for prompt injection and tool abuse. Before that: national bug bounty triage in the public sector, regional offensive security delivery, and two published CVEs.</p>
+
+    <ul class="elsewhere">
+      <li><a href="https://github.com/josz5930/secarticles">Security writing</a></li>
+      <li><a rel="me" href="https://infosec.exchange/@josephzeng">Mastodon</a></li>
+      <li><a href="https://github.com/josz5930">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/josephzeng/">LinkedIn</a></li>
+    </ul>
+  </header>
+
+  <main id="main">
+
+    <section class="record">
+      <h2>Now</h2>
+      <div>
+        <ul class="plain">
+          <li>Leading a team of seven engineers plus interns in Singapore, working with counterparts in China, Australia, the UK and the US.</li>
+          <li>Reading and testing agentic systems: prompt injection, tool abuse, and access control for model-driven workflows.</li>
+          <li>Studying part-time MSc in Design and Artificial Intelligence for Enterprise at SUTD since September 2026.</li>
+          <li>Open to senior roles in AI security, application security and technology management.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="record">
+      <h2>Selected AI and agentic security work</h2>
+      <div>
+
+        <article class="entry">
+          <h3>An LLM effort-prediction system, from idea to org-wide deployment</h3>
+          <p>Conceived, specified and shipped a system that reads product requirement documents and entity-relationship diagrams, then predicts the person-days a penetration test will need. Ran a one-month trial with structured feedback capture, tuned it against actual outcomes, and deployed it across the whole project-management estate. It survived deprecation of the platform underneath it and the loss of the linked engineering headcount, and was later released to the global security organisation as a reusable asset.</p>
+        </article>
+
+        <article class="entry">
+          <h3>An agentic security-review pipeline, and the case for not shipping it everywhere</h3>
+          <p>Built and evaluated an LLM agent that performs enhanced automated security review on live engineering tickets. Measured its time cost in a controlled trial on one product line before committing to an expansion pace, and held a documented position with engineering stakeholders that deterministic questionnaire logic keeps precedence over model judgement until the evidence supports handover.</p>
+        </article>
+
+        <article class="entry">
+          <h3>Adversarial evaluation of shipping AI features</h3>
+          <p>Hands-on prompt-injection and agent-abuse testing of live AI features, using Promptfoo as a standing part of security review. Built internal evaluation endpoints for cross-language prompt fidelity and prompt optimisation on the company model platform.</p>
+        </article>
+
+        <article class="entry">
+          <h3>A two-tier assistant for developer security questions</h3>
+          <p>Wrote the requirements and configured the knowledge base for an assistant that answers developer questions on secure-SDLC process and remediation. A fast non-reasoning model handles intent and sentiment routing; a reasoning model handles substantive answers. Extended it to intervene automatically on stalled remediation tickets and to serve an on-demand support channel.</p>
+        </article>
+
+        <article class="entry">
+          <h3>Risk that had not arrived yet</h3>
+          <p>Warned a product team about an account-takeover pattern in an AI support flow that could change account state without verifying identity, after a comparable incident elsewhere. Surfaced a supply-chain detection capability to the platform security team in response to a model-library poisoning incident class.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="record">
+      <h2>Published vulnerability research</h2>
+      <div>
+        <div class="finding">
+          <a class="cve" href="https://nvd.nist.gov/vuln/detail/CVE-2015-2210">CVE-2015-2210</a>
+          <p>Command injection in the help system of a retail point-of-sale product. A local user could inject JavaScript into the window source to spawn a command shell, escaping the locked-down till environment. Rated 7.8 high. Disclosed 2015.</p>
+        </div>
+        <div class="finding">
+          <a class="cve" href="https://nvd.nist.gov/vuln/detail/CVE-2014-2729">CVE-2014-2729</a>
+          <p>Stored cross-site scripting in a commercial web content management system, reached through an unhandled parameter and executed on page load. Fixed by the vendor. Disclosed 2014.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="record">
+      <h2>Experience</h2>
+      <div>
+
+        <article class="entry">
+          <h3>Application Security Manager</h3>
+          <p class="meta"><b>ByteDance</b>, Singapore &nbsp;·&nbsp; Nov 2024 – present</p>
+          <ul class="plain">
+            <li>Own the application security assurance gates, security design review and penetration testing, for product lines in the rest-of-world scope.</li>
+            <li>Proposed and led architecture planning for a platform-level replacement of the design-review stage after the incumbent platform lost engineering support, de-risking rollout by piloting where no pipeline depended on the gate.</li>
+            <li>Found and closed process-gate bypasses where features shipped without review, separating platform defects from human circumvention and driving systemic fixes with the product organisation instead of one-off remediation.</li>
+            <li>Designed the response to an IDOR exploitation incident: full automated scanning coverage plus structured training for the entire affected engineering organisation, rather than the minimum remediation.</li>
+            <li>Built and launched a bilingual Mandarin and English secure-SDLC course end to end, then scaled it across eight engineering organisations by securing department-head consent one at a time. 636 engineers completed it at an 82% completion rate in one half-year, measured against a baseline corrected for departed staff rather than a flattering one.</li>
+            <li>Grew the team from five to seven, screening 200+ resumes across 20+ interviews, and rebuilt the interview process with questions resistant to LLM assistance. Sponsored two promotion packets and held delivery together through heavy attrition on adjacent platform teams.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <h3>Head of Offensive Security Services</h3>
+          <p class="meta"><b>Bitdefender APAC</b> (f.k.a. Horangi), Singapore &nbsp;·&nbsp; Apr 2021 – Nov 2024</p>
+          <ul class="plain">
+            <li>Delivered 100+ engagements across banking, financial services, fintech, energy and government: web, mobile, network, cloud, thick-client and protocol testing, architecture review, source-code review and compliance work.</li>
+            <li>Managed a team of ten and built higher-value service lines, including red team attack path mapping and smart contract review, taking the team through certification and guided delivery to reach capability.</li>
+            <li>Rewrote most of the SOC 2 control procedures and enforced least privilege across two AWS accounts, replacing administrator access for eight engineers with scoped roles.</li>
+            <li>Designed and facilitated table-top exercises for business continuity, malware and intrusion scenarios, on site and remote, through to after-action review. Ran CREST membership renewal with legal, finance, compliance and vendors.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <h3>Senior Cybersecurity Specialist</h3>
+          <p class="meta"><b>GovTech Singapore</b> &nbsp;·&nbsp; Jun 2019 – Apr 2021</p>
+          <ul class="plain">
+            <li>Ran triage for the national Government Bug Bounty Programme and Vulnerability Disclosure Programme: 400+ reports reviewed, 40+ assessed in detail, consistently inside a two-day reproduction metric.</li>
+            <li>Managed a cross-organisational team of 14 for one programme iteration, covering triage testers, staff seconded from other agencies, interns, and a monitoring and intake team.</li>
+            <li>Presented quarterly to the Assistant Chief Executive and to government CISOs on vulnerability trends, researcher demographics and manpower projections. Wrote the programme-level final report that went to Permanent Secretary level.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <h3>Senior Manager</h3>
+          <p class="meta"><b>Lazada</b>, Singapore &nbsp;·&nbsp; Jul 2017 – Jun 2019</p>
+          <ul class="plain">
+            <li>Ran periodic and pre-launch penetration testing for web and mobile across the group and its subsidiaries, and owned the testing process, procedure documentation and rostering.</li>
+            <li>Created the assessment approach for independent service vendors integrating with platform APIs, deciding what to test and how across thick clients, web and mobile.</li>
+            <li>Findings included server-side request forgery, backdoor OTP values, absent password validation, and a duplicate-identifier condition that caused denial of service.</li>
+            <li>Built developer security e-training, delivered a two-day secure coding course, and spoke on physical-security threat modelling at Div0 in January 2019.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <h3>Lead Consultant</h3>
+          <p class="meta"><b>NCS</b>, Singapore &nbsp;·&nbsp; Mar 2015 – Jun 2017</p>
+          <ul class="plain">
+            <li>Project manager and lead implementer on a three-year government monitoring programme worth $4m+, covering 71+ organisations through sinkhole sampling, delivered with a team of six.</li>
+            <li>Built NCS capability in mobile application penetration testing, wireless assessment and source code review, and led a three-year assurance programme spanning architecture review, vulnerability assessment, penetration testing and host configuration review.</li>
+            <li>Led development of services built on threat intelligence partnerships, from sinkhole and spam-trap security ratings to human-intelligence adversary tracking. Ran presales scoping, effort estimation and proposals.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <h3>Senior Associate</h3>
+          <p class="meta"><b>KPMG</b>, Singapore &nbsp;·&nbsp; Nov 2012 – Mar 2015</p>
+          <ul class="plain">
+            <li>Assessed clients across financial services, pharmaceutical, oil and gas, education, public administration and transport, using web application testing, source code review, desktop and mobile testing, and configuration assessment.</li>
+            <li>Published two vulnerabilities, listed above, both assigned CVE identifiers.</li>
+            <li>Led creation of Java and .NET secure coding guidelines and wrote Objective-C guidelines for a regional bank. Led a year-long effort producing operating system hardening baselines with a junior associate and two interns.</li>
+            <li>Performed three-phase post-incident assurance for breached clients: asset and port discovery, vulnerability scan, penetration test.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <h3>Software Engineer</h3>
+          <p class="meta"><b>ST Engineering</b> (Info-Software Systems), Singapore &nbsp;·&nbsp; May 2010 – Nov 2012</p>
+          <ul class="plain">
+            <li>Subsystem lead and deputy test manager on an $11m distributed systems programme with twelve full-time developers. Ran functional, load and stress testing, plus static and dynamic analysis against the OWASP Top Ten.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="record">
+      <h2>Certifications</h2>
+      <div>
+        <dl class="certs">
+          <dt>AI and cloud</dt>
+          <dd>Certified AI Security Professional (CAISP) · Certified Cloud Security Professional (CCSP) · GIAC Cloud Penetration Tester (GCPN)</dd>
+
+          <dt>Offensive security</dt>
+          <dd>OffSec Certified Professional (OSCP) · OffSec Web Expert (OSWE) · HTB Certified Web Exploitation Specialist (CWES) · GIAC Penetration Tester (GPEN) · GIAC Mobile Device Security Analyst (GMOB) · GIAC Open Source Intelligence (GOSI)</dd>
+
+          <dt>Defensive and governance</dt>
+          <dd>Certified Information Systems Security Professional (CISSP) · GIAC Certified Web Application Defender (GWEB) · Certified Threat Modeling Professional (CTMP)</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="record">
+      <h2>Education and languages</h2>
+      <div>
+        <ul class="plain">
+          <li>MSc, Design and Artificial Intelligence for Enterprise — Singapore University of Technology and Design. Part-time, from September 2026.</li>
+          <li>Bachelor of Computing (Honours), Electronic Commerce — National University of Singapore, 2010.</li>
+          <li>English, native. Mandarin Chinese, HSK Level 5.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Views here are my own and are not those of any employer. For anything industry-related, reach me through Mastodon or LinkedIn rather than this page.</p>
+  </footer>
+
+</div>
 </body>
 </html>
